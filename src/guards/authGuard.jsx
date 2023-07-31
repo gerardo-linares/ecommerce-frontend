@@ -1,0 +1,15 @@
+import { Navigate, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { PublicRoutes } from "../models/routes";
+
+const AuthGuard = () => {
+  const userState = useSelector((store) => store.user);
+  console.log(userState);
+  return userState.name ? (
+    <Outlet />
+  ) : (
+    <Navigate replace={true} to={`${PublicRoutes.HOME}`} />
+  );
+};
+
+export default AuthGuard;
